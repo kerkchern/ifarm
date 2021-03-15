@@ -1,0 +1,27 @@
+server:
+ port: 9191
+  
+ spring:
+  application:
+   name: API-GATEWAY 
+ cloud:
+   gateway:
+     routes:
+       - id: MONITOR-PLAN-SERVICE
+         uri: lb://MONITOR-PLAN-SERVICE
+         predicates:
+           - Path=/monitorPlan/**
+       - id: LISTING-SERVICE
+         uri: lb://LISTING-SERVICE
+         predicates:
+           - Path=/farmListing/**
+
+   
+eureka:
+ client: 
+  register-with-euraka: true
+  fetch-registry: true
+  service-url:
+   defaultZone: http://localhost:8761/eureka/
+ instance:
+  hostname:localhost  

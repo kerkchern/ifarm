@@ -1,0 +1,12 @@
+1615027790180	Rename resource 'FarmListingController.java'
+1615027805109	Rename resource 'FarmListing.java'
+1615027817301	Rename resource 'FarmListingRepository.java'
+1615027825510	Rename resource 'FarmListingService.java'
+1615028153808	Delete element
+1615028171760	Delete element
+1615028178064	Delete element
+1615028214528	Delete elements
+1615028316803	Delete elements
+1615028992055	Encapsulate field 'farmId'
+1615029543609	Encapsulate field 'farmListing'
+1615029547208	Encapsulate field 'monitorPlan'

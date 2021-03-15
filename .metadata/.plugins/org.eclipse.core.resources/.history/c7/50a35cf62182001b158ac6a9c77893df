@@ -1,0 +1,17 @@
+package com.ifarm.monitorplanservice;
+
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+@Component
+public class RestTemplateDummy {
+	 @LoadBalanced
+	 public RestTemplate getRestTemplate() {
+	       // TODO set up your restTemplate
+		 	rt = new RestTemplate();
+	        rt.setRequestFactory( new HttpComponentsClientHttpRequestFactory() );
+	        return rt;
+	    }
+}

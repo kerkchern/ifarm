@@ -1,0 +1,9 @@
+package com.ifarm.cloudgateway;
+
+@RestController
+public class FallBackMethodController {
+	
+	public String monitorPlanFallBackMethod() {
+		return "Monitor Plan Service is taking longer than expected.";
+	}
+}

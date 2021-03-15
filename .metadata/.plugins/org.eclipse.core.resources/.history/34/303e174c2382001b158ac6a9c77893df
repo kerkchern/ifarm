@@ -1,0 +1,15 @@
+server:
+  port : 9002
+ 
+spring:
+ application:
+  name: MONITOR-PLAN-SERVICE 
+
+eureka:
+ client: 
+  register-with-euraka: false
+  fetch-registry: false
+  service-url:
+   defaultZone: http://localhost:8761/eureka/
+ instance:
+  hostname:localhost
