@@ -6,6 +6,12 @@ spring:
   name: API-GATEWAY 
  cloud:
   gateway:
+   globalcors:
+    corsConfigurations:
+     '[/**]':
+      allowedOrigins: "*"
+      allowedMethods: "*"
+      allowedHeaders: "*"
    routes:
     - id: MONITOR-PLAN-SERVICE
       uri: lb://MONITOR-PLAN-SERVICE

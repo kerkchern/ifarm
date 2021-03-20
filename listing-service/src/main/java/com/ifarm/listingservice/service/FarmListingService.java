@@ -26,5 +26,13 @@ public class FarmListingService {
 
 	public List<FarmListing> findAllListing() {
 		return farmListingRepository.findAll();
+	}
+
+	public void deleteById(Long farmId) {
+		farmListingRepository.deleteById(farmId);
+	}
+
+	public FarmListing updateFarmListing(FarmListing form) {
+		return farmListingRepository.save(form);
 	}	
 }
