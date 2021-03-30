@@ -34,5 +34,14 @@ public class FarmListingService {
 
 	public FarmListing updateFarmListing(FarmListing form) {
 		return farmListingRepository.save(form);
+	}
+
+	public List<FarmListing> findByIsBook(boolean isBook) {
+		return farmListingRepository.findByIsBook(isBook);
+	}
+
+	public List<FarmListing> findByBookedBy(String farmerName) {
+		return farmListingRepository.findByBookedBy(farmerName);
 	}	
+	
 }

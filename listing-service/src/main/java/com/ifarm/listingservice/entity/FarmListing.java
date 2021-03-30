@@ -2,8 +2,9 @@ package com.ifarm.listingservice.entity;
 
 import java.math.BigDecimal;
 import java.sql.Blob;
-import java.util.Date;
+import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +29,12 @@ public class FarmListing {
 	private String toDate;
 	private String area;
 	private String type;
+	private boolean isBook;
+	private String bookedBy;
+	@ElementCollection
+	private List<String> pendingList;
+	@ElementCollection
+	private List<String> confirmList;
 	private Blob image;
 	
 	public FarmListing() {
@@ -82,5 +89,38 @@ public class FarmListing {
 	public void setImage(Blob image) {
 		this.image = image;
 	}
+
+	public boolean isBook() {
+		return isBook;
+	}
+
+	public void setBook(boolean isBook) {
+		this.isBook = isBook;
+	}
+
+	public List<String> getPendingList() {
+		return pendingList;
+	}
+
+	public void setPendingList(List<String> pendingList) {
+		this.pendingList = pendingList;
+	}
+
+	public List<String> getConfirmList() {
+		return confirmList;
+	}
+
+	public void setConfirmList(List<String> confirmList) {
+		this.confirmList = confirmList;
+	}
+
+	public String getBookedBy() {
+		return bookedBy;
+	}
+
+	public void setBookedBy(String bookedBy) {
+		this.bookedBy = bookedBy;
+	}
+
 	
 }
