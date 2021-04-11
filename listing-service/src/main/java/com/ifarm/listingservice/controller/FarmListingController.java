@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ifarm.listingservice.entity.FarmInventory;
 import com.ifarm.listingservice.entity.FarmListing;
 import com.ifarm.listingservice.entity.FarmWorkerRequest;
+import com.ifarm.listingservice.service.FarmInventoryService;
 import com.ifarm.listingservice.service.FarmListingService;
 import com.ifarm.listingservice.service.FarmWorkerRequestService;
 
@@ -26,6 +28,9 @@ public class FarmListingController {
 	
 	@Autowired
 	private FarmWorkerRequestService farmWorkerRequestService;
+	
+	@Autowired
+	private FarmInventoryService farmInventoryService;
 	
 	@RequestMapping(method = RequestMethod.POST, path = "/farmListing/add")
 	public FarmListing saveListing(@RequestBody FarmListing form) {
@@ -150,6 +155,25 @@ public class FarmListingController {
 		FarmWorkerRequest farmWorkerRequest = farmWorkerRequestService.acceptFarmWorkerRequest(request);
 				
 		return farmWorkerRequest;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, path = "/farmListing/inventory/add")
+	public FarmInventory saveInventory(@RequestBody FarmInventory form) {
+
+		FarmInventory inventory= farmInventoryService.saveFarmInventory(form);
+		
+		return inventory;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/farmListing/inventory/retrieve")
+	public List<FarmInventory> findAllInventory() {
+		return farmInventoryService.findAllInventory();
+	}
+	
+	@RequestMapping(method = RequestMethod.DELETE, path = "/farmListing/inventory/delete/{inventId}")
+	public ResponseEntity<Void>  deleteInventory(@PathVariable("inventId") Long inventId) {
+		farmInventoryService.deleteById(inventId);
+		return ResponseEntity.noContent().build();
 	}
 	
 }
