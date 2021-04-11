@@ -1,0 +1,39 @@
+<div class="container">
+  <br>
+  <div class="card ">
+      <h1 class="d-inline card-header">Create New Farm Inventory</h1>
+    <div class ="card-body">
+      <div class="container">
+        <form (ngSubmit)="!inventForm.invalid && onSubmit(inventForm.value)" #inventForm="ngForm">
+          <div *ngIf="(inventForm.submitted && inventForm.invalid)"
+              class="alert alert-danger">
+              <div *ngIf="name.errors?.required">
+                Inventory Name is required.
+              </div>
+              <div *ngIf="price.errors?.required">
+                Price is required.
+              </div>
+              <div *ngIf="name.errors?.minlength">
+                Name must be at least 4 characters long.
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="name">Inventory Name: </label>
+            <input type="text" class="form-control" id="name"
+            [ngModel]="inventory.name" #name="ngModel" name="name"
+            minlength="4" maxlength="25" required>
+          </div>
+          <div class="form-group">
+            <label for="price">Price: </label>
+            <input type="text" class="form-control" id="price"
+            [ngModel]="inventory.price" #price="ngModel" name="price" maxlength="15" required>
+          </div>
+          <div class="form-group">
+              <button type="submit" class="btn btn-success">Save</button>
+              <button type="button" class="btn btn-danger" routerLink = "/inventory">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

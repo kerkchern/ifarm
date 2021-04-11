@@ -1,0 +1,58 @@
+<div class="container-fluid">
+  <br/>
+
+  <div class="card ">
+    <h1 class="card-header">
+      Farm Listing Module
+    </h1>
+    <div class="card-body">
+        <div class="text-right">
+          <button class="btn btn-success" (click)="addListing()">Creating Listing</button>
+        </div>
+
+        <br>
+
+        <table class="table table-striped" style="width: 100%">
+          <thead class= "table-header">
+              <tr>
+                  <th>Listing Name</th>
+                  <th>Price</th>
+                  <th>From Date</th>
+                  <th>To Date</th>
+                  <th>Area (sqm)</th>
+                  <th>Type</th>
+                  <th>Is Booked?</th>
+                  <th></th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor = "let listing of listings">
+                  <td>
+                  <label>
+                  <a href='javascript:void(0)' (click)="updateListing(listing)" >
+                  {{listing.name}}</a>
+                  </label></td>
+                  <td>{{listing.price}}</td>
+                  <td>{{listing.fromDate | date}}</td>
+                  <td>{{listing.toDate | date}}</td>
+                  <td>{{listing.area}}</td>
+                  <td>{{listing.type}}</td>
+                  <td>{{listing.book ? "Booked" : "Not Booked"}}</td>
+                  <td *ngIf = 'listing.book === true'></td>
+                  <td *ngIf = 'listing.book === false'><button class="btn btn-success" (click)="updateListing(listing)">Update/View Listing</button></td>
+                  <td><button class="btn btn-danger" (click)="deleteListing(listing.farmId)">Delete Listing</button></td>
+              </tr>
+              <tr *ngIf = '!listings || listings.length == 0'>
+                <td class='text-center' colspan=12>
+                  No Record(s) Found.
+                </td>
+              </tr>
+          </tbody>
+      </table>
+
+
+    </div>
+
+  </div>
+</div>

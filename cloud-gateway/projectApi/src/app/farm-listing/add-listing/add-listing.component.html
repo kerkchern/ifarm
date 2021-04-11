@@ -1,0 +1,80 @@
+<div class="container">
+  <br>
+  <div class="card ">
+      <h1 class="d-inline card-header">{{isModeCreate() ? 'Create New' : 'Update'}} Farm Listing</h1>
+    <div class ="card-body">
+      <div class="container">
+        <form (ngSubmit)="!listingForm.invalid && onSubmit(listingForm.value, isModeCreate())" #listingForm="ngForm">
+          <div *ngIf="(listingForm.submitted && listingForm.invalid)"
+              class="alert alert-danger">
+              <div *ngIf="name.errors?.required">
+                Farm Name is required.
+              </div>
+              <div *ngIf="price.errors?.required">
+                Farm Price is required.
+              </div>
+              <div *ngIf="area.errors?.required">
+                Farm Area is required.
+              </div>
+              <div *ngIf="type.errors?.required">
+                Farm Type is required.
+              </div>
+              <div *ngIf="type.errors?.minlength">
+                Name must be at least 4 characters long.
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="name">Farm Name: </label>
+            <input type="text" class="form-control" id="name"
+            [ngModel]="listing.name" #name="ngModel" name="name"
+            minlength="4" maxlength="25" required>
+          </div>
+          <div class="form-group">
+            <label for="price">Price: </label>
+            <input type="text" class="form-control" id="price"
+            [ngModel]="listing.price" #price="ngModel" name="price" maxlength="15" required>
+          </div>
+          <div class="form-group">
+            <label for="fromDate">Rent Start Date: </label>
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd"
+                     name="fromDate" [(ngModel)]="listing.fromDate" ngbDatepicker #fromDate="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="fromDate.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="toDate">Rent End Date: </label>
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd"
+                     name="toDate" [(ngModel)]="listing.toDate" ngbDatepicker #toDate="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="toDate.toggle()" type="button">
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="area">Area (sqm): </label>
+            <input type="text" class="form-control" id="area"
+            [ngModel]="listing.area" #area="ngModel" name="area" required>
+          </div>
+          <div class="form-group">
+            <label for="type">Type: </label>
+            <select  class="form-control"
+            [ngModel]="listing.type" #type="ngModel" name="type" required>
+              <option [value]="type" *ngFor="let type of types">
+                {{type}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+              <button type="submit" class="btn btn-success">{{isModeCreate() ? 'Add' : 'Save'}}</button>
+              <button type="button" class="btn btn-danger" routerLink = "/listing">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

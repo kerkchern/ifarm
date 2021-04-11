@@ -1,0 +1,58 @@
+<div class="container-fluid">
+  <br/>
+
+  <div class="card ">
+    <h1 class="card-header">
+      Farm Working Request (Submit Requests)
+    </h1>
+    <div class="card-body">
+
+        <br>
+
+        <table class="table table-striped" style="width: 100%">
+          <thead class= "table-header">
+              <tr>
+                  <th>ID</th>
+                  <th>Listing Name</th>
+                  <!-- <th>Price</th> -->
+                  <th>From Date</th>
+                  <th>To Date</th>
+                  <!-- <th>Area (sqm)</th> -->
+                  <th>Type</th>
+                  <th>Is Booked?</th>
+                  <th>Booked By</th>
+                  <th>Pending Worker List</th>
+                  <th>Confirmed Worker List</th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor = "let listing of listings">
+                  <td>{{listing.farmId}}</td>
+                  <td>{{listing.name}}</td>
+                  <!-- <td>{{listing.price}}</td> -->
+                  <td>{{listing.fromDate | date}}</td>
+                  <td>{{listing.toDate | date}}</td>
+                  <!-- <td>{{listing.area}}</td> -->
+                  <td>{{listing.type}}</td>
+                  <td>{{listing.book ? "Booked" : "Not Booked"}}</td>
+                  <td>{{listing.bookedBy}}</td>
+                  <td>{{listing.pendingList}}</td>
+                  <td>{{listing.confirmList}}</td>
+                  <td ><button class="btn btn-success"
+                    *ngIf="!isPending(this.authentication.getUser(), listing)"
+                    (click)="requestListing(listing)">Submit Request</button></td>
+              </tr>
+              <tr *ngIf = '!listings || listings.length == 0'>
+                <td class='text-center' colspan=12>
+                  No Record(s) Found.
+                </td>
+              </tr>
+          </tbody>
+      </table>
+
+
+    </div>
+
+  </div>
+</div>

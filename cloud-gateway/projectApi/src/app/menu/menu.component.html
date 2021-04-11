@@ -1,0 +1,20 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <div><a class ="navbar-brand">
+          iFarm</a></div>
+      <ul class="navbar-nav" *ngIf="authService.isUserLoggedIn()">
+          <li><a routerLink="/home" class="nav-link">Home</a></li>
+          <li *ngIf="authService.getUser() === 'landlord'"><a routerLink="/listing" class="nav-link">Farm Listing</a></li>
+          <li *ngIf="authService.getUser().indexOf('farmer') > -1"><a routerLink="/farmerlisting" class="nav-link">Farm Booking</a></li>
+          <li *ngIf="authService.getUser().indexOf('farmer') > -1"><a routerLink="/acceptworklisting" class="nav-link">Farm Working Request</a></li>
+          <li *ngIf="authService.getUser().indexOf('worker') > -1"><a routerLink="/workerlisting" class="nav-link">Farm Working Request</a></li>
+          <li *ngIf="authService.getUser().indexOf('admin') > -1"><a routerLink="/inventory" class="nav-link">Farm Inventory</a></li>
+          <li><a routerLink="/monitorplan" class="nav-link"> Monitoring and Planning </a></li>
+      </ul>
+      <ul class="navbar-nav navbar-collapse justify-content-end" *ngIf="authService.isUserLoggedIn()">
+        <li>
+          <span class="nav-link disabled">Login User: {{authService.getUser()}}</span>
+          <a href="javascript:void(0)" class="nav-link float-right" (click)="authService.logout()">Logout</a></li>
+      </ul>
+  </nav>
+</header>

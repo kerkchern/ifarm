@@ -1,0 +1,54 @@
+<div class="container">
+  <br>
+  <div class="card ">
+      <h1 class="d-inline card-header">View Farm Listing</h1>
+    <div class ="card-body">
+      <div class="container">
+        <form (ngSubmit)="onSubmit(listingForm.value)" #listingForm="ngForm">
+          <div class="form-group">
+            <label for="name">Farm Name: </label>
+            <input type="text" class="form-control" id="name"
+            [ngModel]="listing.name" #name="ngModel" name="name" readonly>
+          </div>
+          <div class="form-group">
+            <label for="price">Price: </label>
+            <input type="text" class="form-control" id="price"
+            [ngModel]="listing.price" #price="ngModel" name="price" readonly>
+          </div>
+          <div class="form-group">
+            <label for="fromDate">Rent Start Date: </label>
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd"
+                     name="fromDate" [(ngModel)]="listing.fromDate" ngbDatepicker readonly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="toDate">Rent End Date: </label>
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd"
+                     name="toDate" [(ngModel)]="listing.toDate" ngbDatepicker readonly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="area">Area (sqm): </label>
+            <input type="text" class="form-control" id="area"
+            [ngModel]="listing.area" #area="ngModel" name="area" readonly>
+          </div>
+          <div class="form-group">
+            <label for="type">Type: </label>
+            <select  class="form-control"
+            [ngModel]="listing.type" #type="ngModel" name="type" disabled="true">
+              <option [value]="type" *ngFor="let type of types" >
+                {{type}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+              <button type="submit" class="btn btn-success">Confirm Booking</button>
+              <button type="button" class="btn btn-danger" routerLink = "/farmerlisting">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

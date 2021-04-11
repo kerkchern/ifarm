@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <br/>
+
+  <div class="card ">
+    <h1 class="card-header">
+      Farm Inventory Module
+    </h1>
+    <div class="card-body">
+        <div class="text-right">
+          <button class="btn btn-success" (click)="addInventory()">Creating Inventory</button>
+        </div>
+
+        <br>
+
+        <table class="table table-striped" style="width: 100%">
+          <thead class= "table-header">
+              <tr>
+                  <th>Inventory Name</th>
+                  <th>Price Per Unit</th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor = "let inventory of inventorys">
+                  <td>{{inventory.name}}</td>
+                  <td>{{inventory.price}}</td>
+                  <td><button class="btn btn-danger" (click)="deleteInventory(inventory.inventId)">Delete Inventory</button></td>
+              </tr>
+              <tr *ngIf = '!inventorys || inventorys.length == 0'>
+                <td class='text-center' colspan=12>
+                  No Record(s) Found.
+                </td>
+              </tr>
+          </tbody>
+      </table>
+
+
+    </div>
+
+  </div>
+</div>
