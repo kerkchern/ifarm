@@ -1,0 +1,47 @@
+<div class="container">
+  <br>
+  <div class="card ">
+      <h1 class="d-inline card-header">Add/View Farm Inventory</h1>
+    <div class ="card-body">
+      <div class="container">
+          <table class="table table-borderless table-striped">
+            <thead>
+              <th>Inventory Name</th>
+              <th>Price/Unit</th>
+              <th>Unit</th>
+              <th>Total</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of form.farmInventoryList ">
+                <td>
+                  <label>{{item.name}}</label>
+                </td>
+                <td>
+                  <label>{{item.price}}</label>
+                </td>
+                <td>
+                  <input class="form-control" type="text" [(ngModel)]="item.unit" [disabled]="listing.book">
+                </td>
+                <td>
+                  <label>{{item.price * item.unit}}</label>
+                </td>
+              </tr>
+              <br>
+              <div class="form-group">
+                <button class="btn btn-success" (click)="save()">Save</button>
+                <button class="btn btn-danger" routerLink = "/farmerlisting">Cancel</button>
+              </div>
+            </tbody>
+            <br>
+            <tbody *ngIf='!form.farmInventoryList'>
+              <tr>
+                <td class='text-center' colspan=12>No Inventory Found.</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+      </div>
+    </div>
+  </div>
+</div>
