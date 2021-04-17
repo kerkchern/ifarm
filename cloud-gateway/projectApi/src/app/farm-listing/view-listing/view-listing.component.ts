@@ -61,10 +61,12 @@ export class ViewListingComponent implements OnInit {
       this.listing.fromDate = this.fromDate;
       this.listing.toDate = this.toDate;
 
+      console.log(this.listing);
 
   }
 
   onSubmit(form){
+        console.log(form);
 
         form.fromDate = this.parserFormatter.format(form.fromDate);
         form.toDate = this.parserFormatter.format(form.toDate);
@@ -75,12 +77,13 @@ export class ViewListingComponent implements OnInit {
 
         this.bookedBy = this.authentication.getUser();
 
-        if(!confirm("Are you sure you want to book [" + form.name + "]  ?")) {
+        if(!confirm("Are you sure you want to book [" + form.name + "]  ? " +
+          "Please save inventory before booking. Inventory cannot be updated upon booking of farm.")) {
           return
         }
 
         console.log("confirm book farm");
-        console.log(form);
+
         this.requestService.put(`/farmListing/book/${this.farmId}/${this.bookedBy}`, form).subscribe(
           data => {
             this.listing = data as any;

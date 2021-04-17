@@ -54,8 +54,13 @@ export class WorkerListingComponent implements OnInit {
     );
   }
 
-  isPending(username, listing){
+  isPendingOrConfirmed(username, listing){
     for(var val of listing.pendingList){
+      if(val === username){
+        return true;
+      }
+    }
+    for(var val of listing.confirmList){
       if(val === username){
         return true;
       }

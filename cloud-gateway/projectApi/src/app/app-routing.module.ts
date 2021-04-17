@@ -1,4 +1,5 @@
 
+
 import { RouteGuardService } from './service/route-guard.service';
 import { ListingComponent } from './farm-listing/listing/listing.component';
 import { NgModule } from '@angular/core';
@@ -13,6 +14,7 @@ import { WorkerListingComponent } from './farm-listing/worker-listing/worker-lis
 import { AcceptWorkListingComponent } from './farm-listing/accept-work-listing/accept-work-listing.component';
 import { InventoryComponent } from './farm-listing/inventory/inventory.component';
 import { AddInventoryComponent } from './farm-listing/add-inventory/add-inventory.component';
+import { AddFarmerInventoryComponent } from './farm-listing/add-farmer-inventory/add-farmer-inventory.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -26,6 +28,7 @@ const routes: Routes = [
   {path: 'addlisting/:farmId', component: AddListingComponent, canActivate:[RouteGuardService]},
   {path: 'inventory', component: InventoryComponent, canActivate:[RouteGuardService]},
   {path: 'addinventory', component: AddInventoryComponent, canActivate:[RouteGuardService]},
+  {path: 'addfarmerinventory/:farmId', component: AddFarmerInventoryComponent, canActivate:[RouteGuardService]},
   {path: 'monitorplan', component: MonitorPlanComponent, canActivate:[RouteGuardService]}
 ];
 

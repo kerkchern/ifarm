@@ -36,8 +36,8 @@
                   <td>{{listing.bookedBy}}</td>
                   <td><button class="btn btn-success" *ngIf="!listing.book"
                     (click)="viewListing(listing)">Book Listing</button></td>
-                  <td><button class="btn btn-warning" *ngIf="!listing.book"
-                    (click)="addInventory(listing)">Add Inventory</button></td>
+                  <td><button class="btn btn-warning"
+                    (click)="addInventory(listing)">Add/View Inventory</button></td>
               </tr>
               <tr *ngIf = '!listings || listings.length == 0'>
                 <td class='text-center' colspan=12>

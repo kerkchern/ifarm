@@ -37,8 +37,8 @@
           <div class="form-group">
             <label for="type">Type: </label>
             <select  class="form-control"
-            [ngModel]="listing.type" #type="ngModel" name="type" disabled="true">
-              <option [value]="type" *ngFor="let type of types" >
+            [ngModel]="listing.type" #type="ngModel" name="type" readonly>
+              <option [value]="type" *ngFor="let type of types" disabled>
                 {{type}}
               </option>
             </select>

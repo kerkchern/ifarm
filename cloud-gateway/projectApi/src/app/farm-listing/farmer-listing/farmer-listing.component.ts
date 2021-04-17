@@ -36,7 +36,6 @@ export class FarmerListingComponent implements OnInit {
 
   ngOnInit(): void {
     this.retrieveAllListings();
-
   }
 
   retrieveAllListings(){
@@ -55,7 +54,8 @@ export class FarmerListingComponent implements OnInit {
   }
 
   addInventory(listing){
-    this.router.navigate(['addInventory', listing.farmId]);
+    this.dataService.setDataObj({form : listing});
+    this.router.navigate(['addfarmerinventory', listing.farmId]);
   }
 
 }

@@ -11,13 +11,15 @@ import { DataService } from '../../service/data.service';
 })
 export class AddFarmerInventoryComponent implements OnInit {
 
+  farmId : '';
+
   form = {
     listingId: '',
     farmInventoryList: []
   }
-  
 
   inventory = {
+    farmid: null,
     inventId : null,
     name: '',
     price: '',
@@ -44,12 +46,21 @@ export class AddFarmerInventoryComponent implements OnInit {
   ngOnInit(): void {
     this.listing = this.dataService.dataObj.form;
     console.log(this.listing);
+
     this.retrieveAllInventorys();
   }
 
   retrieveAllInventorys(){
     console.log('retrieve all inventorys...');
-    this.requestService.get('/farmListing/inventory/retrieve').subscribe(
+    this.farmId = this.listing.farmId;
+    console.log(this.farmId);
+    // this.requestService.get('/farmListing/inventory/retrieve').subscribe(
+    //   data => {
+    //     this.form.farmInventoryList = data as any;
+    //     console.log(this.form.farmInventoryList);
+    //   }
+    // );
+    this.requestService.get(`/farmListing/farmerInventory/retrieve/${this.farmId}`).subscribe(
       data => {
         this.form.farmInventoryList = data as any;
         console.log(this.form.farmInventoryList);
@@ -59,11 +70,16 @@ export class AddFarmerInventoryComponent implements OnInit {
 
   save(){
     console.log('submitting add inventory form..')
+
     this.form.listingId = this.listing.farmId;
-      this.requestService.put('/farmListing/farmerInventory/add', this.form).subscribe(
+    console.log(this.form);
+
+    // if(!confirm("Are you sure to Book the following inventories? Changes are not allowed once it is submitted.")) {
+    //   return
+    // }
+
+      this.requestService.post('/farmListing/farmerInventory/add', this.form).subscribe(
       data => {
-        this.form = data as any;
-        console.log(this.form);
         this.router.navigate(['farmerlisting']);
       }
     )
