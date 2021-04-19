@@ -5,12 +5,15 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ifarm.listingservice.entity.FarmListing;
+import com.ifarm.listingservice.entity.FarmListingInventory;
 import com.ifarm.listingservice.repo.FarmListingRepository;
 
 
 @Service
+@Transactional
 public class FarmListingService {
 	
 	@Autowired
@@ -31,7 +34,7 @@ public class FarmListingService {
 	public void deleteById(Long farmId) {
 		farmListingRepository.deleteById(farmId);
 	}
-
+	
 	public FarmListing updateFarmListing(FarmListing form) {
 		return farmListingRepository.save(form);
 	}
@@ -42,6 +45,6 @@ public class FarmListingService {
 
 	public List<FarmListing> findByBookedBy(String farmerName) {
 		return farmListingRepository.findByBookedBy(farmerName);
-	}	
+	}
 	
 }

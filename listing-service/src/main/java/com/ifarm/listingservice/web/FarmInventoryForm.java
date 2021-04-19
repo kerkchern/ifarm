@@ -6,6 +6,7 @@ import com.ifarm.listingservice.entity.FarmInventory;
 
 public class FarmInventoryForm {
 	private Long listingId;
+	private boolean isBooked;
 	private List<FarmInventory> farmInventoryList;
 	public Long getListingId() {
 		return listingId;
@@ -18,5 +19,11 @@ public class FarmInventoryForm {
 	}
 	public void setFarmInventoryList(List<FarmInventory> farmInventoryList) {
 		this.farmInventoryList = farmInventoryList;
+	}
+	public boolean isBooked() {
+		return isBooked;
+	}
+	public void setBooked(boolean isBooked) {
+		this.isBooked = isBooked;
 	}
 }

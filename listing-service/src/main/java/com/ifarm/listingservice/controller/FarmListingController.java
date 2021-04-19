@@ -1,5 +1,6 @@
 package com.ifarm.listingservice.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,10 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ifarm.listingservice.entity.FarmInventory;
 import com.ifarm.listingservice.entity.FarmListing;
+import com.ifarm.listingservice.entity.FarmListingInventory;
 import com.ifarm.listingservice.entity.FarmWorkerRequest;
 import com.ifarm.listingservice.service.FarmInventoryService;
+import com.ifarm.listingservice.service.FarmListingInventoryService;
 import com.ifarm.listingservice.service.FarmListingService;
 import com.ifarm.listingservice.service.FarmWorkerRequestService;
+import com.ifarm.listingservice.web.FarmInventoryForm;
 
 @CrossOrigin(origins="http://localhost:4200")
 @RestController
@@ -32,12 +36,30 @@ public class FarmListingController {
 	@Autowired
 	private FarmInventoryService farmInventoryService;
 	
+	@Autowired
+	private FarmListingInventoryService farmInventoryListingService;
+	
 	@RequestMapping(method = RequestMethod.POST, path = "/farmListing/add")
 	public FarmListing saveListing(@RequestBody FarmListing form) {
 		form.setBook(false);
 		form.setPendingList(null);
 		form.setConfirmList(null);
 		FarmListing farm= farmListingService.saveFarmListing(form);
+		
+		Long farmId = form.getFarmId();
+		
+		List<FarmInventory> list = farmInventoryService.findAllInventory();
+		for(FarmInventory inventory: list) {
+			FarmListingInventory farmListingInventory = new FarmListingInventory();
+			farmListingInventory.setFarmId(farmId);
+			farmListingInventory.setInventId(inventory.getInventId());
+			farmListingInventory.setName(inventory.getName());
+			farmListingInventory.setPrice(inventory.getPrice());
+			farmListingInventory.setUnit(0);
+			farmListingInventory.setTotal(new BigDecimal(0));
+			farmInventoryListingService.saveFarmListingInventory(farmListingInventory);
+		}
+		
 		return farm;
 	}
 	
@@ -82,6 +104,10 @@ public class FarmListingController {
 		form.setBookedBy(username);
 		form.setBook(true);
 		FarmListing farm= farmListingService.updateFarmListing(form);
+		
+		//insert values for Monitor Plan
+		
+		
 		return farm;
 	}
 	
@@ -175,5 +201,33 @@ public class FarmListingController {
 		farmInventoryService.deleteById(inventId);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@RequestMapping(method = RequestMethod.POST, path = "/farmListing/farmerInventory/add")
+	public void saveFarmerInventory(@RequestBody FarmInventoryForm form) {
+
+		Long farmId = form.getListingId();
+		
+		for(FarmInventory inventory: form.getFarmInventoryList()) {
+			FarmListingInventory farmListingInventory = new FarmListingInventory();
+			farmListingInventory.setFarmId(farmId);
+			farmListingInventory.setInventId(inventory.getInventId());
+			farmListingInventory.setName(inventory.getName());
+			farmListingInventory.setPrice(inventory.getPrice());
+			farmListingInventory.setUnit(inventory.getUnit());
+			farmListingInventory.setTotal(inventory.getPrice().multiply(BigDecimal.valueOf( inventory.getUnit() )));
+			farmInventoryListingService.saveFarmListingInventory(farmListingInventory);
+		}
+//		
+//		Optional<FarmListing> optionalFarmListing = farmListingService.findFarmListingById(farmId);
+//		FarmListing farmListing = optionalFarmListing.get();
+//		farmListingService.updateFarmListing(farmListing);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/farmListing/farmerInventory/retrieve/{farmId}")
+	public List<FarmListingInventory> findFarmListingInventory(@PathVariable("farmId") Long farmId) {
+		List<FarmListingInventory> farmListingInventory = farmInventoryListingService.findFarmListingInventoryByIdFarmId(farmId);
+		return farmListingInventory;
+	}
+
 	
 }

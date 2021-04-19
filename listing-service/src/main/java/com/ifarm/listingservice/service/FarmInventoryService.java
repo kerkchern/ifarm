@@ -24,6 +24,10 @@ public class FarmInventoryService {
 
 	public void deleteById(Long inventId) {
 		farmInventoryRepository.deleteById(inventId);
+	}
+
+	public FarmInventory updateFarmInventory(FarmInventory farmInventory) {
+		return farmInventoryRepository.save(farmInventory);
 	}	
 	
 }

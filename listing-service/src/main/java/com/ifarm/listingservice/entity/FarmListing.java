@@ -5,16 +5,19 @@ import java.sql.Blob;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "farmlisting")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,6 +38,8 @@ public class FarmListing {
 	private List<String> pendingList;
 	@ElementCollection
 	private List<String> confirmList;
+	@ElementCollection
+	private List<FarmInventory> farmInventoryList;
 	private Blob image;
 	
 	public FarmListing() {
@@ -121,6 +126,15 @@ public class FarmListing {
 	public void setBookedBy(String bookedBy) {
 		this.bookedBy = bookedBy;
 	}
+
+	public List<FarmInventory> getFarmInventoryList() {
+		return farmInventoryList;
+	}
+
+	public void setFarmInventoryList(List<FarmInventory> farmInventoryList) {
+		this.farmInventoryList = farmInventoryList;
+	}
+
 
 	
 }
