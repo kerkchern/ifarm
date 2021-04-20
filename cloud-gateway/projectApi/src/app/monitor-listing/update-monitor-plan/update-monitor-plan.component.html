@@ -1,0 +1,31 @@
+<div class="container">
+  <br>
+  <div class="card ">
+      <h1 class="d-inline card-header">Update Farm Status</h1>
+    <div class ="card-body">
+      <div class="container">
+        <form (ngSubmit)="!listingForm.invalid && onSubmit(listingForm.value)" #listingForm="ngForm">
+          <div class="form-group">
+            <label for="name">Farm Name: </label>
+            <input type="text" class="form-control" id="name"
+            [ngModel]="listing.name" #name="ngModel" name="name"
+            minlength="4" maxlength="25" required>
+          </div>
+          <div class="form-group">
+            <label for="type">Type: </label>
+            <select  class="form-control"
+            [ngModel]="listing.type" #type="ngModel" name="type" required>
+              <option [value]="type" *ngFor="let type of types">
+                {{type}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+              <button type="submit" class="btn btn-success">Save</button>
+              <button type="button" class="btn btn-danger" routerLink = "/workermonitorplan">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
