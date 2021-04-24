@@ -9,12 +9,8 @@
           <li *ngIf="authService.getUser().indexOf('farmer') > -1"><a routerLink="/acceptworklisting" class="nav-link">Farm Working Request</a></li>
           <li *ngIf="authService.getUser().indexOf('worker') > -1"><a routerLink="/workerlisting" class="nav-link">Farm Working Request</a></li>
           <li *ngIf="authService.getUser().indexOf('admin') > -1"><a routerLink="/inventory" class="nav-link">Farm Inventory</a></li>
-<<<<<<< HEAD
           <li *ngIf="authService.getUser().indexOf('farmer') > -1"><a routerLink="/farmermonitorplan" class="nav-link">Monitoring</a></li>
-          <li><a routerLink="/monitorplan" class="nav-link"> Monitoring and Planning </a></li>
-=======
           <li *ngIf="authService.getUser().indexOf('worker') > -1"><a routerLink="/workermonitorplan" class="nav-link">Monitor Plan </a></li>
->>>>>>> 7f519f140c0c163e3998bde4fbd34f338b475ea2
       </ul>
       <ul class="navbar-nav navbar-collapse justify-content-end" *ngIf="authService.isUserLoggedIn()">
         <li>

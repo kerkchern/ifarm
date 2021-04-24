@@ -1,9 +1,6 @@
 package com.ifarm.monitorplanservice.service;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
-=======
->>>>>>> 7f519f140c0c163e3998bde4fbd34f338b475ea2
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
