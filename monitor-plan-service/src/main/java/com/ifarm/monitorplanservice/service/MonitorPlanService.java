@@ -1,6 +1,9 @@
 package com.ifarm.monitorplanservice.service;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> 7f519f140c0c163e3998bde4fbd34f338b475ea2
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -8,6 +11,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.ifarm.monitorplanservice.VO.FarmListing;
@@ -17,6 +21,7 @@ import com.ifarm.monitorplanservice.repository.MonitorPlanRepository;
 
 
 @Service
+@Transactional
 public class MonitorPlanService {
 	
 	@Autowired
@@ -32,6 +37,10 @@ public class MonitorPlanService {
 	
 	public Optional<MonitorPlan> findMonitorPlanById(Long id) {
 		return monitorPlanRepository.findById(id);
+	}
+	
+	public List<MonitorPlan> findAllListing() {
+		return monitorPlanRepository.findAll();
 	}
 
 	public List<MonitorPlanListing> getMonitorPlanWithFarmListing(String farmerName) {
@@ -59,6 +68,14 @@ public class MonitorPlanService {
 	public MonitorPlan getMonitorPlanByfarmId(Long id) {
 		return monitorPlanRepository.getMonitorPlanByfarmId(id);
 	}
+	
+	public FarmListing[] findFarmListing() {
+		return restTemplate.getForObject("http://LISTING-SERVICE/farmListing/retrieve", FarmListing[].class);
+	}
+	
+	
+	
+	
 
 	
 

@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <br/>
+  
+    <div class="card ">
+      <h1 class="card-header">
+        <h1 class="d-inline card-header">{{isModeCreate() ? 'Create New' : 'Update'}} Crops Feedback</h1>
+      </h1>
+      <div class="card-body">
+        <div class="container">
+          <form (ngSubmit)="!listingForm.invalid && onSubmit(listingForm.value, isModeCreate())" #listingForm="ngForm">
+            <div class="form-group">
+              <label for="name">Farm Land: </label>
+              <select class="form-control" [(ngModel)]="listing.farmId" #farmId="ngModel" name="farmId"> 
+                <option *ngFor="let farm of farmList" [value]="farm.farmId">{{farm.name}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="name">Risk Level: </label>
+              <select  class="form-control" [ngModel]="listing.riskLevel" #riskLevel="ngModel" name="riskLevel" >
+                <option value="">- Select -</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="name">Mineral Level: </label>
+              <select  class="form-control" [ngModel]="listing.mineralLevel" #mineralLevel="ngModel" name="mineralLevel" >
+                <option value="">- Select -</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="name">Soil Level: </label>
+              <select  class="form-control" [ngModel]="listing.soilLevel" #soilLevel="ngModel" name="soilLevel" >
+                <option value="">- Select -</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="name">Feedback / Remarks: </label>
+              <input type="text" class="form-control" id="remarks" [ngModel]="listing.remarks" #remarks="ngModel" name="remarks">
+            </div>
+            <div class="form-group">
+              <label for="name">Upload File: </label>
+              <input #inputFile type='file' class='form-control' style='display:inline-block !important; width:auto !important;' (change)="selectFile($event)"/>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-success">{{isModeCreate() ? 'Add' : 'Save'}}</button>
+              <button type="button" class="btn btn-danger" routerLink = "/workermonitorplan">Cancel</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
