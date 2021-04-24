@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
+import com.ifarm.listingservice.VO.MonitorPlan;
 import com.ifarm.listingservice.entity.FarmListing;
 import com.ifarm.listingservice.entity.FarmListingInventory;
 import com.ifarm.listingservice.repo.FarmListingRepository;
@@ -18,6 +21,9 @@ public class FarmListingService {
 	
 	@Autowired
 	private FarmListingRepository farmListingRepository;
+	
+	@Autowired
+	private RestTemplate restTemplate;
 
 	public FarmListing saveFarmListing(FarmListing farmListing) {
 		return farmListingRepository.save(farmListing);
@@ -45,6 +51,12 @@ public class FarmListingService {
 
 	public List<FarmListing> findByBookedBy(String farmerName) {
 		return farmListingRepository.findByBookedBy(farmerName);
+	}
+	
+	public void addMonitorPlan(long farmId) {
+		MonitorPlan monitorPlan = new MonitorPlan();
+		monitorPlan.setFarmId(farmId);
+		restTemplate.postForObject("http://MONITOR-PLAN-SERVICE/monitorPlan/saveCrops", monitorPlan,MonitorPlan.class);
 	}
 	
 }

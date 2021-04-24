@@ -60,6 +60,8 @@ public class FarmListingController {
 			farmInventoryListingService.saveFarmListingInventory(farmListingInventory);
 		}
 		
+		farmListingService.addMonitorPlan(farmId);
+		
 		return farm;
 	}
 	
@@ -187,6 +189,17 @@ public class FarmListingController {
 	public FarmInventory saveInventory(@RequestBody FarmInventory form) {
 
 		FarmInventory inventory= farmInventoryService.saveFarmInventory(form);
+		
+		for(FarmListing farmListing: farmListingService.findAllListing()) {
+			FarmListingInventory farmListingInventory = new FarmListingInventory();
+			farmListingInventory.setFarmId(farmListing.getFarmId());
+			farmListingInventory.setInventId(inventory.getInventId());
+			farmListingInventory.setName(inventory.getName());
+			farmListingInventory.setPrice(inventory.getPrice());
+			farmListingInventory.setUnit(inventory.getUnit());
+			farmListingInventory.setTotal(inventory.getPrice());
+			farmInventoryListingService.saveFarmListingInventory(farmListingInventory);
+		}
 		
 		return inventory;
 	}

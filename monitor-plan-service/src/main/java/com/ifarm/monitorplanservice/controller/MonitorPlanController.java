@@ -28,7 +28,7 @@ public class MonitorPlanController {
 	@Autowired
 	private MonitorPlanService monitorPlanService;
 	
-	@RequestMapping(method = RequestMethod.POST, path = "/")
+	@RequestMapping(method = RequestMethod.POST, path = "/monitorPlan/saveCrops")
 	public MonitorPlan saveMonitorPlan(@RequestBody MonitorPlan monitorPlan) {
 		MonitorPlan farm= monitorPlanService.saveMonitorPlan(monitorPlan);
 		return farm;
