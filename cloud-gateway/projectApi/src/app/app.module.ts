@@ -24,6 +24,7 @@ import { AcceptWorkListingComponent } from './farm-listing/accept-work-listing/a
 import { InventoryComponent } from './farm-listing/inventory/inventory.component';
 import { AddInventoryComponent } from './farm-listing/add-inventory/add-inventory.component';
 import { AddFarmerInventoryComponent } from './farm-listing/add-farmer-inventory/add-farmer-inventory.component';
+import { FarmerMonitorPlanComponent } from './monitor-listing/farmer-monitor-plan/farmer-monitor-plan.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { AddFarmerInventoryComponent } from './farm-listing/add-farmer-inventory
     AcceptWorkListingComponent,
     InventoryComponent,
     AddInventoryComponent,
-    AddFarmerInventoryComponent
+    AddFarmerInventoryComponent,
+    FarmerMonitorPlanComponent
   ],
   imports: [
     BrowserModule,
