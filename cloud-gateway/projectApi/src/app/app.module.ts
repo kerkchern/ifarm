@@ -24,7 +24,8 @@ import { AcceptWorkListingComponent } from './farm-listing/accept-work-listing/a
 import { InventoryComponent } from './farm-listing/inventory/inventory.component';
 import { AddInventoryComponent } from './farm-listing/add-inventory/add-inventory.component';
 import { AddFarmerInventoryComponent } from './farm-listing/add-farmer-inventory/add-farmer-inventory.component';
-
+import { WorkerMonitorPlanComponent } from './monitor-listing/worker-monitor-plan/worker-monitor-plan.component';
+import { WorkerAddCropsFeedbackComponent } from './monitor-listing/worker-add-crops-feedback/worker-add-crops-feedback.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import { AddFarmerInventoryComponent } from './farm-listing/add-farmer-inventory
     AcceptWorkListingComponent,
     InventoryComponent,
     AddInventoryComponent,
-    AddFarmerInventoryComponent
+    AddFarmerInventoryComponent,
+    WorkerMonitorPlanComponent,
+    WorkerAddCropsFeedbackComponent,
   ],
   imports: [
     BrowserModule,

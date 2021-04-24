@@ -5,12 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "monitorplan")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,12 +20,17 @@ public class MonitorPlan {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long monitorPlanId;
 	private Long farmId;
 	private String remarks;
 	private String riskLevel;
 	private String mineralLevel;
 	private String soilLevel;
 	
+	
+	public MonitorPlan() {
+		
+	}
 	public String getRemarks() {
 		return remarks;
 	}
@@ -54,5 +61,11 @@ public class MonitorPlan {
 	public void setFarmId(Long farmId) {
 		this.farmId = farmId;
 	}
-	
+	public Long getMonitorPlanId() {
+		return monitorPlanId;
+	}
+	public void setMonitorPlanId(Long monitorPlanId) {
+		this.monitorPlanId = monitorPlanId;
+	}
+
 }

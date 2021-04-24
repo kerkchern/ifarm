@@ -3,28 +3,42 @@
 
   <div class="card ">
     <h1 class="card-header">
-      Worker Monitoring and Planning Module
+      View Crops Feedback
     </h1>
     <div class="card-body">
-
+        <div class="text-right">
+          <button class="btn btn-success" (click)="createCropsFeedback()">Create Crops Feedback</button>
+        </div>
         <br>
-
         <table class="table table-striped" style="width: 100%">
           <thead class= "table-header">
               <tr>
-                  <th>Listing Name</th>
-                  <th>Booked By</th>
-                  <th>Worker Confirmed List</th>
-                  <th></th>
+                  <th>Id</th>
+                  <th>Farm Id</th>
+                  <th>Farm Name</th>
+                  <th>Feedback</th>
+                  <th>Risk Level</th>
+                  <th>Mineral Level</th>
+                  <th>Soil Level</th>
               </tr>
           </thead>
           <tbody>
               <tr *ngFor = "let listing of listings">
-                  <td>{{listing.name}}</td>
-                  <td>{{listing.bookedBy}}</td>
-                  <td>{{listing.confirmList}}</td>
-                  <td><button class="btn btn-success" *ngIf="listing.confirmList.indexOf(authService.getUser()) > -1"
-                    (click)="updateStatus(listing)">Update Status</button></td>
+                  <td>
+                    <label>
+                      <a href='javascript:void(0)' (click)="updateCropsFeedback(listing)" >
+                      {{listing.monitorPlanId}}</a>
+                    </label>
+                  </td>
+                  <td>{{listing.farmId}}</td>
+                  <div *ngFor="let farm of farmList">
+                    <td *ngIf="(farm.farmId == listing.farmId)">{{farm.name}}</td>
+                  </div>
+                  <td>{{listing.remarks}}</td>
+                  <td>{{listing.riskLevel}}</td>
+                  <td>{{listing.mineralLevel}}</td>
+                  <td>{{listing.soilLevel}}</td>
+
               </tr>
               <tr *ngIf = '!listings || listings.length == 0'>
                 <td class='text-center' colspan=12>

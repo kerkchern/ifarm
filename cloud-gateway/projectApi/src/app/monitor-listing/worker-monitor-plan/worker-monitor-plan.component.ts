@@ -14,18 +14,18 @@ export class WorkerMonitorPlanComponent implements OnInit {
   listings: [];
 
   listing = {
+    monitorPlanId : null,
     farmId : null,
-    name: '',
-    price : null,
-    fromDate : null,
-    toDate : null,
-    area : '',
-    type : '',
-    isBook: '',
-    bookedBy: '',
-    pendingList: '',
-    confirmList: '',
+    remarks : '',
+    riskLevel : '',
+    mineralLevel : '',
+    soilLevel : '',
     image: null
+  }
+
+  farmList = {
+    farmId : null,
+    name : ''
   }
 
   constructor(
@@ -36,12 +36,21 @@ export class WorkerMonitorPlanComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.retrieveFarmListings();
     this.retrieveListings();
+  }
+
+  retrieveFarmListings(){
+    this.requestService.get('/monitorPlan/getFarmList').subscribe(
+      data => {
+        this.farmList = data as any;
+      }
+    )
   }
 
   retrieveListings(){
     console.log('retrieve worker monitor plan...');
-    this.requestService.get('/farmListing/retrieve').subscribe(
+    this.requestService.get('/monitorPlan/retrieve').subscribe(
       data => {
         this.listings = data as any;
         console.log(this.listings);
@@ -49,9 +58,13 @@ export class WorkerMonitorPlanComponent implements OnInit {
     );
   }
 
-  updateStatus(listing){
-    this.dataService.setDataObj({form : listing});
-    this.router.navigate(['updatemonitorplan', listing.farmId]);
+  createCropsFeedback(){
+    this.dataService.setDataObj({isCreate : true, form : null});
+    this.router.navigate(['workeraddcropsfeedbackplan']);
   }
 
+  updateCropsFeedback(listing){
+    this.dataService.setDataObj({isCreate : false, form : listing});
+    this.router.navigate(['workeraddcropsfeedbackplan', listing.monitorPlanId]);
+  }
 }
