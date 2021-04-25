@@ -14,4 +14,6 @@ public interface FarmListingRepository extends JpaRepository<FarmListing, Long> 
 
 	List<FarmListing> findByBookedBy(String farmerName);
 
+	Integer countByType(String string);
+
 }

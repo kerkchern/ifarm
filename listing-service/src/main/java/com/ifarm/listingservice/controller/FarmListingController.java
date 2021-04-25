@@ -1,6 +1,7 @@
 package com.ifarm.listingservice.controller;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -240,6 +241,13 @@ public class FarmListingController {
 	public List<FarmListingInventory> findFarmListingInventory(@PathVariable("farmId") Long farmId) {
 		List<FarmListingInventory> farmListingInventory = farmInventoryListingService.findFarmListingInventoryByIdFarmId(farmId);
 		return farmListingInventory;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/farmListing/retrieve/type")
+	public HashMap<String, Integer> findAllListingType() {
+		HashMap<String, Integer> countTypes = new HashMap<String, Integer>();
+		countTypes = farmListingService.findAllListingType();
+		return countTypes;
 	}
 
 	

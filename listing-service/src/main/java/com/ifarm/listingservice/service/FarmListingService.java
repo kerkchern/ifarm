@@ -1,5 +1,6 @@
 package com.ifarm.listingservice.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,6 +58,21 @@ public class FarmListingService {
 		MonitorPlan monitorPlan = new MonitorPlan();
 		monitorPlan.setFarmId(farmId);
 		restTemplate.postForObject("http://MONITOR-PLAN-SERVICE/monitorPlan/saveCrops", monitorPlan,MonitorPlan.class);
+	}
+
+	public HashMap<String, Integer> findAllListingType() {
+		HashMap<String, Integer> countTypes = new HashMap<String, Integer>();
+		Integer cropsCount = farmListingRepository.countByType("Crops");
+		Integer flowerCount = farmListingRepository.countByType("Flower");
+		Integer fruitsCount = farmListingRepository.countByType("Fruits");
+		Integer vegeCount = farmListingRepository.countByType("Vegetables");
+		Integer othersCount = farmListingRepository.countByType("Others");
+		countTypes.put("Crops", cropsCount);
+		countTypes.put("Flower", flowerCount);
+		countTypes.put("Fruits", fruitsCount);
+		countTypes.put("Vegetables", vegeCount);
+		countTypes.put("Others", othersCount);
+		return countTypes;
 	}
 	
 }

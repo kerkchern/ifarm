@@ -9,6 +9,25 @@
         <div class="container">
           <h1>Welcome {{username}}!</h1>
         </div>
+        <br>
+        <div class="container">
+          <h2>Popular/Trending Farm Types: </h2>
+            <p> Crops: {{cropsCount}} </p>
+            <p> Flowers: {{flowerCount}} </p>
+            <p> Fruits: {{fruitsCount}} </p>
+            <p> Vegetables: {{vegetableCount}} </p>
+            <p> Others: {{othersCount}} </p>
+        </div>
+        <div class="container">
+          <div class="chart-wrapper">
+            <canvas baseChart
+            height="20vh" width="80vw"
+            [data]="doughnutChartData"
+            [labels]="doughnutChartLabels"
+            [chartType]="doughnutChartType">
+            </canvas>
+          </div>
+        </div>
 
     </div>
 
